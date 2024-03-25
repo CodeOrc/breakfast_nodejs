@@ -1,12 +1,16 @@
 import express from "express";
+import "dotenv/config";
 import productRouter from "./routers/product.js";
+
 const app = express();
 const port = process.eventNames.Port || 3000;
 
+//view引擎
 app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use("/product", productRouter);
-
+// console.log(process.env);
 //test view
 app.get("/test", (req, res) => {
   res.render("test", { title: "測試頁" });
@@ -24,9 +28,11 @@ app.use((req, res) => {
 });
 app.use((req, res) => {});
 app.use((req, res) => {});
+
+//binding
 app.listen(port, (error) => {
   if (error) {
     console.log(error);
   }
-  console.log(`app started on port ${port}`);
+  console.log(`啟動，port號為 ${port}`);
 });
