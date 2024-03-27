@@ -4,6 +4,7 @@ import fs from "fs";
 export const product_controller = {
   getAllproduct: async (req, res) => {
     let { category, page, count } = req.query;
+    category = category ? category : "all";
     page = page > 0 ? page : 1;
     count = count > 0 ? count : 25;
 
@@ -98,9 +99,10 @@ export const product_controller = {
     return res.json({ status: "fail", msg: "請上傳圖檔" });
   },
   toggleProductOffer: async (req, res) => {
+    console.log(req.query.p_id);
     res.json(await product_model.toggleProductOffer(req.query.p_id));
   },
   deleteProduct: async (req, res) => {
-    res.json(await product_model.deleteProduct(p_id));
+    res.json(await product_model.deleteProduct(req.query.p_id));
   },
 };

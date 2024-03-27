@@ -38,4 +38,6 @@ router.put(
   update.single("picture"),
   product_controller.updateProductImg
 );
+router.delete("/", product_controller.toggleProductOffer);
+router.delete("/DeleteProduct", product_controller.deleteProduct);
 export default router;

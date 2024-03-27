@@ -10,7 +10,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use("/product", productRouter);
-// console.log(process.env);
+
 //test view
 app.get("/test", (req, res) => {
   res.render("test", { title: "測試頁" });
