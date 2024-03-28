@@ -59,8 +59,8 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+					"mode": "formdata",
+					"formdata": [
 						{
 							"key": "product_name",
 							"value": "測試產品",
@@ -80,6 +80,11 @@
 							"key": "category_id",
 							"value": "1",
 							"type": "text"
+						},
+						{
+							"key": "picture",
+							"type": "file",
+							"src": []
 						}
 					]
 				},
@@ -160,7 +165,7 @@
 						{
 							"key": "picture",
 							"type": "file",
-							"src": "/E:/picture/CSP/仙人掌.png"
+							"src": []
 						}
 					]
 				},
