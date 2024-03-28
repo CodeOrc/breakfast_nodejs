@@ -21,22 +21,22 @@ postman_collection為postman測試路由檔案
 - [POST] /product
   新增產品資料
   formdata
-  -product_name 產品名
-  -price 價格
-  -desc 描述
-  -category_id 產品類別
-  -picture 圖片檔案
+  - product_name 產品名
+  - price 價格
+  - desc 描述
+  - category_id 產品類別
+  - picture 圖片檔案
 - [PUT] /product
   編輯產品資料
-  -product_name 產品名
-  -price 價格
-  -desc 描述
-  -category_id 產品類別
+  - product_name 產品名
+  - price 價格
+  - desc 描述
+  - category_id 產品類別
   
 - [PUT] /product
   編輯產品圖片
   formdata
-  -picture:圖片檔案
+  - picture:圖片檔案
   
 - [DELETE] /product
   變更產品的供應狀態，1或0。
