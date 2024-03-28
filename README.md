@@ -10,7 +10,7 @@ postman_collection為postman測試路由檔案
 ## 功能
 - [GET] /product  
   取得全部資料  
-  request query
+  - request query
     - page 所在頁數
     - category 指定產品類別id，沒有指定則取全部類別。
     - count 每頁幾筆資料，無指定預設為25。
@@ -20,30 +20,30 @@ postman_collection為postman測試路由檔案
   
 - [POST] /product  
   新增產品資料  
-  formdata
-  - product_name 產品名
-  - price 價格
-  - desc 描述
-  - category_id 產品類別
-  - picture 圖片檔案
+  - formdata
+    - product_name 產品名
+    - price 價格
+    - desc 描述
+    - category_id 產品類別
+    - picture 圖片檔案
 - [PUT] /product  
-  編輯產品資料
-  - product_name 產品名
-  - price 價格
-  - desc 描述
-  - category_id 產品類別
+  -編輯產品資料
+    - product_name 產品名
+    - price 價格
+    - desc 描述
+    - category_id 產品類別
   
 - [PUT] /product  
   編輯產品圖片  
-  formdata
-  - picture:圖片檔案
+  - formdata
+    - picture:圖片檔案
   
 - [DELETE] /product  
   變更產品的供應狀態，1或0。  
-  request query
-  - p_id 產品id
+  - request query
+    - p_id 產品id
     
 - [DELETE] /product/deleteProduct  
   確切從資料庫刪除產品資料  
-  request query
-  - p_id 產品id
+  - request query
+    - p_id 產品id
