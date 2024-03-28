@@ -33,7 +33,7 @@ postman_collection為postman測試路由檔案
     - desc 描述
     - category_id 產品類別
   
-- [PUT] /product  
+- [PUT] /product/updateImg  
   編輯產品圖片  
   - formdata
     - picture:圖片檔案
