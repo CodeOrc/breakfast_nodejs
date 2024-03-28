@@ -103,6 +103,15 @@ export const product_controller = {
     res.json(await product_model.toggleProductOffer(req.query.p_id));
   },
   deleteProduct: async (req, res) => {
+    const p = await product_model.getProduct(req.query.p_id);
+    if (p.status == "fail" || !p.data) {
+      return res.json(p);
+    }
+    fs.unlink("./public/imgs/" + p.data.img, function (err) {
+      if (err) {
+        return console.error(err);
+      }
+    });
     res.json(await product_model.deleteProduct(req.query.p_id));
   },
 };
