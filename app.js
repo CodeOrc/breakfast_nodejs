@@ -1,7 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import productRouter from "./routers/product.js";
-
+import productViewRouter from "./routers/productView.js";
 const app = express();
 const port = process.eventNames.Port || 3000;
 
@@ -10,7 +10,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use("/product", productRouter);
-
+app.use("/", productViewRouter);
 //test view
 app.get("/test", (req, res) => {
   res.render("test", { title: "測試頁" });

@@ -16,6 +16,7 @@ export const product_model = {
         status: "success",
         data: rows,
         totalCount: totalCount,
+        page: currentPage,
         totalPage: Math.ceil(totalCount / count),
         msg: "取得資料",
       };
@@ -41,6 +42,7 @@ export const product_model = {
         status: "success",
         data: rows,
         totalCount: totalCount,
+        page: currentPage,
         totalPage: Math.ceil(totalCount / count),
         msg: "取得資料",
       };
