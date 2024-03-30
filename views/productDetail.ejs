@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <%- include("./partials/head")%>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center mt-3">
+        <form class="g-3 col-6 border rounded-2 p-3 pt-4">
+          <div class="row mb-2 justify-content-center">
+           
+            <div class="col-auto"><div class="p-2 mb-2 col-auto"><img src="../imgs/<%-data.img?"data.img":"no_img.png" %>" alt=""></div>
+            <input type="file" name="pictuce" id="img"></div>
+          </div>
+          <div class="row mb-2">
+              <div class="col-2">
+                <label for="p_id">p_id:</label>
+              </div>
+              <div class="col-10">
+                <p><%=data.p_id %></p>
+                <input
+                  type="text"
+                  hidden
+                  readonly
+                  class="form-control"
+                  name="p_id"
+                  id="p_id"
+                  value="<%=data.p_id  %>"
+                />
+            </div>
+          </div>
+            <div class="row mb-2">
+            <div class="col-2">
+              <label for="product_name">品名:</label>
+            </div>
+
+            <div class="col-10">
+              <input
+                type="text"
+                class="form-control"
+                name="product_name"
+                id="product_name"
+                value="<%=data.product_name  %>"
+              />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-2">
+              <label for="desc">產品描述:</label>
+            </div>
+
+            <div class="col-10">
+              <textarea
+                class="form-control"
+                name="desc"
+                id="desc"
+                value="<%=data.desc  %>"
+              ></textarea>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-2">
+              <label for="price">價格:</label>
+            </div>
+
+            <div class="col-10">
+              <input
+                type="number"
+                class="form-control"
+                name="price"
+                id="price"
+                value="<%=data.price %>"
+              />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-2">
+              <label for="on_offer" class="">狀態:</label>
+            </div>
+
+            <div class="col-10">
+              <p type="text" class="<%=data.on_offer==1?"text-primary":"text-warning" %>" name="on_offer" id="on_offer">
+                <%=data.on_offer==1?"供應中":"停止供應" %>
+              </p>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-2">
+              <label>tags:</label>
+            </div>
+
+            <div class="col-10">
+              <%if(data.tags){for(let tag of data.tags){%>
+              <p class="badge text-bg-info text-light"><%=tag%></p>
+              
+              <%}}%>
+            </div>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">
+              編輯
+            </button>
+            <a href="./productList" type="button" class="btn btn-primary mb-3">
+              回列表
+            </a>
+          </div>
+        </form>
+      </div>
+    
+    </div>
+    <%- include("./partials/script")%>
+  </body>
+</html>
