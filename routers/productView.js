@@ -14,7 +14,12 @@ router.get("/productList", async (req, res) => {
       : await product_model.getProductByCategory(category, page, count);
 
   if (dbRes.status == "success") {
-    return res.render("productList", { title: "產品列表", ...dbRes });
+    return res.render("productList", {
+      title: "產品列表",
+      ...dbRes,
+      page: page,
+      category: category,
+    });
   }
 
   res.redirect("/test");

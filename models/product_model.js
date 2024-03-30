@@ -42,7 +42,6 @@ export const product_model = {
         status: "success",
         data: rows,
         totalCount: totalCount,
-        page: currentPage,
         totalPage: Math.ceil(totalCount / count),
         msg: "取得資料",
       };
@@ -198,6 +197,81 @@ export const product_model = {
       const [row] = await pool.execute("DELETE FROM `product` WHERE p_id = ?", [
         p_id,
       ]);
+      return {
+        status: "success",
+        data: row,
+        msg: "資料刪除成功",
+      };
+    } catch (err) {
+      return {
+        status: "fail",
+        msg: err.message,
+      };
+    }
+  },
+  //取得所有產品副分類
+  getAllSubCategory: async () => {
+    try {
+      const [row] = await pool.execute(
+        "SELECT `sub_category`.sub_c_id,`sub_category`.category_name AS sub_category_name,`main_category`.main_c_id,`main_category`.category_name AS main_category_name FROM `sub_category` JOIN `main_category` ON `sub_category`.main_c_id=`main_category`.main_c_id"
+      );
+      return {
+        status: "success",
+        data: row,
+        msg: "資料刪除成功",
+      };
+    } catch (err) {
+      return {
+        status: "fail",
+        msg: err.message,
+      };
+    }
+  },
+  //新增產品副分類
+  createSubCategory: async (main_c_id, category_name) => {
+    try {
+      const [row] = await pool.execute(
+        "INSERT INTO `sub_category` (`category_name`,`main_c_id`) VALUES(?,?)",
+        [category_name, main_c_id]
+      );
+      return {
+        status: "success",
+        data: row,
+        msg: "資料新增成功",
+      };
+    } catch (err) {
+      return {
+        status: "fail",
+        msg: err.message,
+      };
+    }
+  },
+  //編輯產品副分類
+  updateSubCategory: async (sub_c_id, category_name, main_c_id) => {
+    try {
+      const [row] = await pool.execute(
+        "UPDATE `sub_category` SET `category_name`=?,`main_c_id`=? WHERE sub_c_id=?",
+        [category_name, main_c_id, sub_c_id]
+      );
+      return {
+        status: "success",
+        data: row,
+        msg: "資料更新成功",
+      };
+    } catch (err) {
+      return {
+        status: "fail",
+        msg: err.message,
+      };
+    }
+  },
+  //刪除產品副分類
+  deleteSubCategory: async (sub_c_id) => {
+    try {
+      const [row] = await pool.execute(
+        "DELETE FROM `sub_category` WHERE `sub_c_id`=?",
+        [sub_c_id]
+      );
       return {
         status: "success",
         data: row,
