@@ -4,7 +4,14 @@
     <%- include("./partials/head")%>
   </head>
   <body>
+   
     <div class="container">
+      <nav class="nav nav-pills nav-fill mt-3 border-bottom">
+        <a class="nav-link <%-category=="all"?"active":""%>" href="./productList?category=all">所有</a>
+        <%for(let sub_category of sub_category_list){%>
+        <a class="nav-link <%-sub_category.sub_c_id==category?"active":""%>" href="./productList?category=<%=sub_category.sub_c_id%>"><%-sub_category.sub_category_name%></a>
+        <%}%>
+      </nav>
       <table class="mt-3 table table-striped">
         <thead>
           <tr class="table-primary">
@@ -31,7 +38,7 @@
             </td>
             <td>
               <a
-                href="./product?p_id=<%=p.p_id%>"
+                href="./productDetail?p_id=<%=p.p_id%>"
                 class="btn btn-sm btn-primary me-1"
                 >編輯</a
               ><button class="btn btn-sm btn-danger">刪除</button>
@@ -43,15 +50,15 @@
 
       <nav aria-label="product list pagination">
         <ul class="pagination justify-content-center">
-          <%for(let i =1 ;i<=totalPage;i++) {%> <%-page!=i? `
-          <li class="page-item">
-            <a class="page-link" href="./productList?page=${i}">${i}</a>
-          </li>
-          ` : `
-          <li class="page-item active" aria-current="page">
+          <%for(let i =1 ;i<=totalPage;i++) {%>
+          <li class="page-item <%-page==i?"active":""%>" <%-page==i?`aria-current="page"`:""%>>
+            <%-page!=i? `
+            <a class="page-link" href="./productList?category=${category}&page=${i}">${i}</a>` : `
             <p class="page-link">${i}</p>
+            ` %>
           </li>
-          ` %> <%}%>
+
+          <%}%>
         </ul>
       </nav>
     </div>
