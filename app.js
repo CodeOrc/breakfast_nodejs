@@ -9,6 +9,7 @@ const port = process.eventNames.Port || 3000;
 //view引擎
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(express.static("public"));
 app.use("/product", productRouter);
 app.use("/category", categoryRouter);
