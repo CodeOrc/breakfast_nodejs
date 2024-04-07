@@ -1,113 +1,145 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
-  <head>
-    <%- include("./partials/head")%>
-  </head>
-  <body>
-    <div class="container">
-      <div class="row justify-content-center mt-3">
-        <form class="g-3 col-6 border rounded-2 p-3 pt-4">
-          <div class="row mb-2 justify-content-center">
-           
-            <div class="col-auto"><div class="p-2 mb-2 col-auto"><img src="../imgs/<%-data.img?"data.img":"no_img.png" %>" alt=""></div>
-            <input type="file" name="pictuce" id="img"></div>
-          </div>
-          <div class="row mb-2">
-              <div class="col-2">
-                <label for="p_id">p_id:</label>
-              </div>
-              <div class="col-10">
-                <p><%=data.p_id %></p>
-                <input
-                  type="text"
-                  hidden
-                  readonly
-                  class="form-control"
-                  name="p_id"
-                  id="p_id"
-                  value="<%=data.p_id  %>"
-                />
-            </div>
-          </div>
-            <div class="row mb-2">
-            <div class="col-2">
-              <label for="product_name">品名:</label>
-            </div>
 
-            <div class="col-10">
-              <input
-                type="text"
-                class="form-control"
-                name="product_name"
-                id="product_name"
-                value="<%=data.product_name  %>"
-              />
-            </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col-2">
-              <label for="desc">產品描述:</label>
-            </div>
+<head>
+  <%- include("./partials/head")%>
+</head>
 
-            <div class="col-10">
-              <textarea
-                class="form-control"
-                name="desc"
-                id="desc"
-                value="<%=data.desc  %>"
-              ></textarea>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col-2">
-              <label for="price">價格:</label>
-            </div>
+<body>
+  <div class="container">
+    <div class="row justify-content-center mt-3">
+      <form id="form" class="g-3 col-6 border rounded-2 p-3 pt-4" enctype="multipart/form-data" action="/product"
+        method="">
+        <div class="row mb-2 justify-content-center">
 
-            <div class="col-10">
-              <input
-                type="number"
-                class="form-control"
-                name="price"
-                id="price"
-                value="<%=data.price %>"
-              />
-            </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col-2">
-              <label for="on_offer" class="">狀態:</label>
-            </div>
-
-            <div class="col-10">
-              <p type="text" class="<%=data.on_offer==1?"text-primary":"text-warning" %>" name="on_offer" id="on_offer">
-                <%=data.on_offer==1?"供應中":"停止供應" %>
-              </p>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col-2">
-              <label>tags:</label>
-            </div>
-
-            <div class="col-10">
-              <%if(data.tags){for(let tag of data.tags){%>
-              <p class="badge text-bg-info text-light"><%=tag%></p>
-              
-              <%}}%>
-            </div>
-          </div>
           <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">
-              編輯
-            </button>
-            <a href="./productList" type="button" class="btn btn-primary mb-3">
-              回列表
-            </a>
+            <div class="p-2 mb-2 col-auto"><img src="../imgs/<%-data.img?" data.img":"no_img.png" %>" alt=""></div>
+            <input type="file" name="pictuce" id="img">
           </div>
-        </form>
-      </div>
-    
+        </div>
+        <div class="row mb-2">
+          <div class="col-2">
+            <label for="p_id">p_id:</label>
+          </div>
+          <div class="col-10">
+            <p>
+              <%=data.p_id %>
+            </p>
+            <input type="text" hidden readonly class="form-control" name="p_id" id="p_id" value="<%=data.p_id  %>" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-2">
+            <label for="product_name">品名:</label>
+          </div>
+
+          <div class="col-10">
+            <input type="text" class="form-control" name="product_name" id="product_name"
+              value="<%=data.product_name  %>" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-2">
+            <label for="desc">產品描述:</label>
+          </div>
+
+          <div class="col-10">
+            <textarea class="form-control" name="desc" id="desc" value="<%=data.desc  %>"></textarea>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-2">
+            <label for="price">價格:</label>
+          </div>
+
+          <div class="col-10">
+            <input type="number" class="form-control" name="price" id="price" value="<%=data.price %>" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-2">
+            <label for="category_id" class="">類別:</label>
+          </div>
+
+          <div class="col-10">
+            <select id="category_id" name="category_id">
+              <%for(let sub_category of sub_category_list){%>
+                <option value=<%=sub_category.sub_c_id%> <%-sub_category.sub_c_id==data.sub_category?"selected":""%>>
+                    <%=sub_category.sub_category_name%>
+                </option>
+                <%}%>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-2">
+            <label for="on_offer" class="">狀態:</label>
+          </div>
+
+          <div class="col-10">
+            <p type="text" class="<%=data.on_offer==1?" text-primary":"text-warning" %>" name="on_offer" id="on_offer">
+              <%=data.on_offer==1?"供應中":"停止供應" %>
+            </p>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-2">
+            <label>tags:</label>
+          </div>
+
+          <div class="col-10">
+            <%if(data.tags){for(let tag of data.tags){%>
+              <p class="badge text-bg-info text-light">
+                <%=tag%>
+              </p>
+
+              <%}}%>
+          </div>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-3">
+            編輯
+          </button>
+          <a href="./productList" class="btn btn-primary mb-3">
+            回列表
+          </a>
+        </div>
+      </form>
     </div>
-    <%- include("./partials/script")%>
-  </body>
+
+  </div>
+  <script type="text/javascript">
+    const form = document.querySelector("#form");
+    form.addEventListener("submit", sendEdit);
+    async function sendEdit(e) {
+      e.preventDefault();
+      const update={
+          p_id: e.target.p_id.value,
+          product_name: e.target.product_name.value,
+          desc: e.target.desc.value,
+          price: e.target.price.value,
+          category_id: e.target.category_id.value
+        }
+      const formdata = new FormData(e.target);
+      // for (let [key, value] of formdata) {
+      //   console.log(value);
+      // }
+      const res = await fetch("/product", {
+        method: "PUT",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formdata).toString(),
+      }).then((r) => {return r.json();}).then((j) => { console.log(j); });
+    }
+    async function EditProduct() {
+
+
+
+
+    }
+    async function EditImage() { }
+
+  </script>
+  <%- include("./partials/script")%>
+</body>
+
 </html>
